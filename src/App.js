@@ -1,47 +1,63 @@
+// @flow
 import React, { Component } from 'react';
 import graphql from 'babel-plugin-relay/macro';
-import { QueryRenderer } from 'react-relay';
+import { QueryRenderer, createFragmentContainer } from 'react-relay';
 
 import { Environment } from './relay';
+import type {App_propsApp} from './__generated__/App_propsApp.graphql';
 
-const App = ({ query }) => {
+type AppProps = {
+  propsApp: App_propsApp,
+}
 
- const {name, species, gender} = query.character
+const App = ({propsApp}: AppProps) => {
+
+  console.log('propsApp == ', propsApp);
+
+  if(!propsApp) return null
+
+  const moreCharacters = ()=> console.log('more characters');
+
+ const results = undefined
+ console.log('results = ', results);
   return (
     <div className="App">
-        <p>
-          `Character name is {name}`
-        </p>
+      {results && 
+        <div>
+          {results.map((character, index)=>
+          <p key={index}>{index +1} ) {character.name}</p>)
+          }
+          <button onClick={()=> moreCharacters()}></button>
+        </div>
+      }
     </div>
   );
 };
 
+const AppFragmentContainer = createFragmentContainer(
+  App, {
+  propsApp: graphql`
+    fragment App_propsApp on Character {
+      name
+      species
+      gender
+      type
+    },
+  `,
+});
+
 const AppQR = ({id, name}) => {
-  console.log('id', id);
-  console.log('name', name);
   return (
      <QueryRenderer
         environment={Environment}
         query={graphql`
-        query AppQuery($id : ID, $name : String){
-          characters(page: 2, filter: { name: $name }) {
-            info {
-              count
-            }
-            results {
-              name
-            }
-          }
+        query AppQuery($id : ID!){
           character(id: $id) {
-            id,
-            name,
-            species,
-            gender,
-            type
+            ...App_propsApp
           }
         }
         `}
-        variables={{id , name }}
+        variables={{id }}
         render={({ error, props }) => {
           console.log('qr: ', error, props);
             if (error) {
@@ -49,7 +65,8 @@ const AppQR = ({id, name}) => {
             }
 
             if (props) {
-              return <App query={props} />;
+              console.log('yes props');
+              return <AppFragmentContainer propsApp={props} />;
             }
 
             return <span>loading</span>;
@@ -59,3 +76,18 @@ const AppQR = ({id, name}) => {
 };
 
 export default AppQR;
+
+
+/*
+, $filter: FilterCharacter
+
+, filter:{name} 
+  characters(page: 2, filter: $filter) {
+            info {
+              count
+            }
+            results {
+              name
+            }
+          }
+*/

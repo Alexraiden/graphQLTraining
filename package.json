@@ -8,6 +8,8 @@
     "not op_mini all"
   ],
   "dependencies": {
+    "flow": "^0.2.3",
+    "flow-bin": "^0.109.0",
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
     "react-relay": "^2.0.0",
@@ -27,6 +29,7 @@
     "eject": "react-scripts eject",
     "relay": "relay-compiler --src ./src --schema ./data/schema.graphql",
     "start": "react-scripts start",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "flow": "flow"
   }
 }
