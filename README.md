@@ -1,16 +1,7 @@
-# Create React App + Relay
+# Strat from Sybelius boilerplate :
 
-Based on this https://facebook.github.io/create-react-app/docs/adding-relay
-and this https://facebook.github.io/relay/docs/en/installation-and-setup.html
+https://github.com/sibelius/create-react-app-relay-modern
 
-This uses babel-plugin-macro to enable babel-plugin-relay without ejecting from CRA
 
-## To generate compiled queries artifacts
-```bash
-yarn relay 
-```
 
-## To run your app
-```bash
-yarn start
 ```
