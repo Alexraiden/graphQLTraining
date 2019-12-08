@@ -1,45 +1,10 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import graphql from 'babel-plugin-relay/macro';
-import { QueryRenderer, createFragmentContainer } from 'react-relay';
-
+import { QueryRenderer} from 'react-relay';
 import { Environment } from './relay';
+import AppFragmentContainer from './components/Characters'
 
-const App = ({propsApp}) => {
-
-  console.log('heeeeeerreerere == ', propsApp.name);
-
-  if(!propsApp) return null
-
-  const moreCharacters = ()=> console.log('more characters');
-
- const results = undefined
- // console.log('results = ', results);
-  return (
-    <div className="App">
-      {results && 
-        <div>
-          {results.map((character, index)=>
-          <p key={index}>{index +1} ) {character.name}</p>)
-          }
-          <button onClick={()=> moreCharacters()}></button>
-        </div>
-      }
-    </div>
-  );
-};
-
-const AppFragmentContainer = createFragmentContainer(
-  App, {
-  propsApp: graphql`
-    fragment App_propsApp on Character {
-      name
-      species
-      gender
-      type
-    },
-  `,
-});
 
 const AppQR = ({id, name}) => {
   return (
@@ -48,7 +13,7 @@ const AppQR = ({id, name}) => {
         query={graphql`
         query AppQuery($id : ID!){
           character(id: $id) {
-            ...App_propsApp
+            ...Characters_propsApp
           }
         }
         `}
