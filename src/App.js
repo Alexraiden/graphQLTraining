@@ -13,7 +13,7 @@ const AppQR = ({id, name}) => {
         query={graphql`
         query AppQuery($id : ID!){
           character(id: $id) {
-            ...Characters_propsApp
+            ...Characters_characters
           }
         }
         `}
@@ -27,7 +27,7 @@ const AppQR = ({id, name}) => {
               console.log('yes props');
               console.log('props === ', props)
               console.log('props.propsApp === ', props.propsApp)
-              return <AppFragmentContainer propsApp={props.character} />;
+              return <AppFragmentContainer characters={props.character} />;
             }
 
             return <span>loading</span>;

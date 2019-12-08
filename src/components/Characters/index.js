@@ -3,10 +3,10 @@ import { createFragmentContainer } from 'react-relay';
 import Display from './Display'
 
 
-const AppFragmentContainer = createFragmentContainer(
+const CharactersFragmentContainer = createFragmentContainer(
     Display, {
-    propsApp: graphql`
-      fragment Characters_propsApp on Character {
+    characters: graphql`
+      fragment Characters_characters on Character {
         name
         species
         gender
@@ -15,4 +15,4 @@ const AppFragmentContainer = createFragmentContainer(
     `,
   });
 
-  export default AppFragmentContainer
+  export default CharactersFragmentContainer

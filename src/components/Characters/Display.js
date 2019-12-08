@@ -1,11 +1,11 @@
 
 import React from 'react';
 
-const App = ({propsApp}) => {
+const App = ({characters}) => {
 
-    console.log('heeeeeerreerere == ', propsApp.name);
+    console.log('heeeeeerreerere == ', characters.name);
   
-    if(!propsApp) return null
+    if(!characters) return null
   
     const moreCharacters = ()=> console.log('more characters');
   
