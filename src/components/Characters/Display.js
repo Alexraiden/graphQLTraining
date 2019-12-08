@@ -3,7 +3,7 @@ import React from 'react';
 
 const App = ({characters}) => {
 
-    console.log('heeeeeerreerere == ', characters.name);
+    console.log('heeeeeerreerere == ', characters);
   
     if(!characters) return null
   

@@ -11,13 +11,13 @@ const AppQR = ({id, name}) => {
      <QueryRenderer
         environment={Environment}
         query={graphql`
-        query AppQuery($id : ID!){
-          character(id: $id) {
+        query AppQuery($name: String){
+          characters(page: 1, filter:{name:$name}) {
             ...Characters_characters
           }
         }
         `}
-        variables={{id : id }}
+        variables={{name : name }}
         render={({ error, props }) => {
             if (error) {
               return <span>{'oups didnt work'}</span>;
@@ -27,7 +27,7 @@ const AppQR = ({id, name}) => {
               console.log('yes props');
               console.log('props === ', props)
               console.log('props.propsApp === ', props.propsApp)
-              return <AppFragmentContainer characters={props.character} />;
+              return <AppFragmentContainer characters={props.characters} />;
             }
 
             return <span>loading</span>;

@@ -6,11 +6,14 @@ import Display from './Display'
 const CharactersFragmentContainer = createFragmentContainer(
     Display, {
     characters: graphql`
-      fragment Characters_characters on Character {
-        name
-        species
-        gender
-        type
+      fragment Characters_characters on Characters @relay(plural: true) {
+          results{
+            name
+            species
+            gender
+            type
+          }
+        
       },
     `,
   });
