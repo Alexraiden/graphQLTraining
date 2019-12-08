@@ -4,22 +4,17 @@ import graphql from 'babel-plugin-relay/macro';
 import { QueryRenderer, createFragmentContainer } from 'react-relay';
 
 import { Environment } from './relay';
-import type {App_propsApp} from './__generated__/App_propsApp.graphql';
 
-type AppProps = {
-  propsApp: App_propsApp,
-}
+const App = ({propsApp}) => {
 
-const App = ({propsApp}: AppProps) => {
-
-  console.log('propsApp == ', propsApp);
+  console.log('heeeeeerreerere == ', propsApp.name);
 
   if(!propsApp) return null
 
   const moreCharacters = ()=> console.log('more characters');
 
  const results = undefined
- console.log('results = ', results);
+ // console.log('results = ', results);
   return (
     <div className="App">
       {results && 
@@ -57,16 +52,17 @@ const AppQR = ({id, name}) => {
           }
         }
         `}
-        variables={{id }}
+        variables={{id : id }}
         render={({ error, props }) => {
-          console.log('qr: ', error, props);
             if (error) {
-              return <span>{error.toString()}</span>;
+              return <span>{'oups didnt work'}</span>;
             }
 
             if (props) {
               console.log('yes props');
-              return <AppFragmentContainer propsApp={props} />;
+              console.log('props === ', props)
+              console.log('props.propsApp === ', props.propsApp)
+              return <AppFragmentContainer propsApp={props.character} />;
             }
 
             return <span>loading</span>;
